@@ -1,28 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memcpy.c                                        :+:      :+:    :+:   */
+/*   ft_putendl_fd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thrio <thrio@student.42.fr>                +#+  +:+       +#+        */
+/*   By: thrio <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/23 11:13:48 by thrio             #+#    #+#             */
-/*   Updated: 2022/08/23 11:26:13 by thrio            ###   ########.fr       */
+/*   Created: 2022/11/16 15:50:26 by thrio             #+#    #+#             */
+/*   Updated: 2022/11/16 15:51:32 by thrio            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*ft_memcpy(void *dest, const void *src, size_t n)
+void	ft_putendl_fd(char *s, int fd)
 {
-	size_t	i;
-
-	if (!dest || !src)
-		return (NULL);
-	i = 0;
-	while (i < n)
-	{
-		*(unsigned char *)(dest + i) = *(unsigned char *)(src + i);
-		i++;
-	}
-	return (dest);
+	ft_putstr_fd(s, fd);
+	write(fd, &"\n", 1);
 }

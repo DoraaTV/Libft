@@ -6,19 +6,21 @@
 #    By: thrio <thrio@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/23 11:14:21 by thrio             #+#    #+#              #
-#    Updated: 2022/09/09 12:00:05 by thrio            ###   ########.fr        #
+#    Updated: 2022/11/18 16:06:05 by thrio            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-SRCS	= ft_memset.c ft_bzero.c ft_memcpy.c ft_memccpy.c ft_isalpha.c ft_isdigit.c ft_isalnum.c ft_isascii.c ft_isprint.c ft_strlen.c ft_strlcat.c ft_toupper.c ft_tolower.c ft_strchr.c ft_strrchr.c ft_strncmp.c
+SRCS	= ft_memset.c ft_bzero.c ft_memcpy.c ft_memmove.c ft_isalpha.c ft_isdigit.c ft_isalnum.c ft_isascii.c ft_isprint.c ft_strlen.c ft_strlcat.c ft_toupper.c ft_tolower.c ft_strchr.c ft_strrchr.c ft_strncmp.c ft_memchr.c ft_memcmp.c ft_strnstr.c ft_atoi.c ft_strdup.c ft_calloc.c ft_strlcpy.c ft_substr.c ft_strjoin.c ft_strtrim.c ft_split.c ft_itoa.c ft_strmapi.c ft_striteri.c ft_putchar_fd.c ft_putstr_fd.c ft_putendl_fd.c ft_putnbr_fd.c
 
-SRCS2	= main.c
+SRCSBO	= ft_lstnew.c ft_lstadd_front.c ft_lstsize.c ft_lstlast.c ft_lstadd_back.c ft_lstdelone.c ft_lstclear.c ft_lstiter.c ft_lstmap.c
 
-OBJS	= ${SRCS:.c=.o} ${SRCS2:.c=.o}
+OBJS	= ${SRCS:.c=.o}
 
-NAME	= libft
+OBJS2	= ${SRCSBO:.c=.o}
 
-CC	= gcc
+NAME	= libft.a
+
+CC	= cc
 
 RM	= rm -f
 
@@ -28,13 +30,15 @@ CFLAGS	= -Wall -Wextra -Werror
 	${CC} ${CFLAGS} -c $< -o ${<:.c=.o}
 
 ${NAME} :	${OBJS}
-		ar rc libft.a ${OBJS}
-		${CC} -o ${NAME} main.o -L. -lft
+		ar rc ${NAME} ${OBJS}
+
+bonus	:	${OBJS} ${OBJS2}
+		ar rc ${NAME} ${OBJS} ${OBJS2}
 
 all:		${NAME}
 
 clean:
-		${RM} ${OBJS}
+		${RM} ${OBJS} ${OBJS2}
 
 fclean:		clean
 		${RM} ${NAME}
@@ -42,8 +46,6 @@ fclean:		clean
 re:		fclean all
 
 norminette:
-		norminette ${SRCS}
+		norminette ${SRCS} ${SRCSBO}
 
-aclean:		norminette all clean
-
-.PHONY:		all clean fclean re aclean norminette
+.PHONY:		all clean fclean re norminette bonus

@@ -1,29 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlcpy.c                                       :+:      :+:    :+:   */
+/*   ft_lstclear.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: thrio <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/12 01:06:26 by thrio             #+#    #+#             */
-/*   Updated: 2022/09/03 10:42:21 by thrio            ###   ########.fr       */
+/*   Created: 2022/11/18 11:50:50 by thrio             #+#    #+#             */
+/*   Updated: 2022/11/18 12:23:21 by thrio            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-unsigned int	ft_strlcpy(char *dest, char *src, unsigned int size)
-{
-	unsigned int	i;
+#include "libft.h"
 
-	i = 0;
-	while (i < size - 1 && src[i] != '\0')
+void	ft_lstclear(t_list **lst, void (*del)(void *))
+{
+	t_list	*buf;
+
+	if (lst)
 	{
-		dest[i] = src[i];
-		i++;
+		while ((*lst))
+		{
+			buf = (*lst)->next;
+			ft_lstdelone((*lst), del);
+			(*lst) = buf;
+		}
 	}
-	while (i < size)
-	{
-		dest[i] = '\0';
-		i++;
-	}
-	return (dest);
 }
